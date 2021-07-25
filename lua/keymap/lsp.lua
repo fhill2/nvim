@@ -1,0 +1,81 @@
+local api = vim.api
+
+--- f mappings
+-- api.nvim_set_keymap('i', '<Tab>', [[pumvisible() ? "\<C-n>" : "<Tab>"]], { expr = true })
+api.nvim_set_keymap('i', '<C-Tab>', [[pumvisible() ? "\<C-p>" : "<C-Tab>"]], {expr = true})
+
+api.nvim_set_keymap('i', '<C-a>', [[pumvisible() ? "\<Esc>li" : "<C-a>"]], {expr = true})
+
+api.nvim_set_keymap('i', '<Up>', [[pumvisible() ? "\<Esc>ki" : "<Up>"]], {expr = true})
+api.nvim_set_keymap('i', '<Down>', [[pumvisible() ? "\<Esc>ji" : "<Down>"]], {expr = true})
+-- nvim lsp-config mappings
+api.nvim_set_keymap('', '<A-z>d', [[<cmd>lua vim.lsp.buf.declaration()<cr>]], {})
+api.nvim_set_keymap('!', '<A-z>d', [[<cmd>lua vim.lsp.buf.declaration()<cr>]], {})
+api.nvim_set_keymap('', '<A-z>h', [[<cmd>lua vim.lsp.buf.hover()<cr>]], {})
+api.nvim_set_keymap('!', '<A-z>h', [[<cmd>lua vim.lsp.buf.hover()<cr>]], {})
+api.nvim_set_keymap('', '<A-z>i', [[<cmd>lua vim.lsp.buf.implementation()<cr>]], {})
+api.nvim_set_keymap('!', '<A-z>i', [[<cmd>lua vim.lsp.buf.implementation()<cr>]], {})
+api.nvim_set_keymap('', '<A-z>s', [[<cmd>lua vim.lsp.buf.signature_help()<cr>]], {})
+api.nvim_set_keymap('!', '<A-z>s', [[<cmd>lua vim.lsp.buf.signature_help()<cr>]], {})
+api.nvim_set_keymap('', '<A-z>a', [[<cmd>lua vim.lsp.buf.add_workspace_folder()<cr>]], {})
+api.nvim_set_keymap('!', '<A-z>a', [[<cmd>lua vim.lsp.buf.add_workspace_folder()<cr>]], {})
+api.nvim_set_keymap('', '<A-z>r', [[<cmd>lua vim.lsp.buf.remove_workspace_folder()<cr>]], {})
+api.nvim_set_keymap('!', '<A-z>r', [[<cmd>lua vim.lsp.buf.remove_workspace_folder()<cr>]], {})
+api.nvim_set_keymap('', '<A-z>l', [[<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<cr>]], {})
+api.nvim_set_keymap('!', '<A-z>l', [[<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<cr>]], {})
+api.nvim_set_keymap('', '<A-z>y', [[<cmd>lua vim.lsp.buf.rename()<cr>]], {})
+api.nvim_set_keymap('!', '<A-z>y', [[<cmd>lua vim.lsp.buf.rename()<cr>]], {})
+api.nvim_set_keymap('', '<A-z>r', [[<cmd>lua vim.lsp.buf.references()<cr>]], {})
+api.nvim_set_keymap('!', '<A-z>r', [[<cmd>lua vim.lsp.buf.references()<cr>]], {})
+api.nvim_set_keymap('', '<A-z>p', [[<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>]], {})
+api.nvim_set_keymap('!', '<A-z>p', [[<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>]], {})
+api.nvim_set_keymap('', '<A-z>g', [[<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>]], {})
+api.nvim_set_keymap('!', '<A-z>g', [[<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>]], {})
+api.nvim_set_keymap('', '<A-z>h', [[<cmd>lua vim.lsp.diagnostic.goto_next()<cr>]], {})
+api.nvim_set_keymap('!', '<A-z>h', [[<cmd>lua vim.lsp.diagnostic.goto_next()<cr>]], {})
+api.nvim_set_keymap('', '<A-z>p', [[<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>]], {})
+api.nvim_set_keymap('!', '<A-z>p', [[<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>]], {})
+api.nvim_set_keymap('', '<A-z>c', [[<cmd>lua vim.lsp.buf.code_action()<cr>]], {})
+api.nvim_set_keymap('!', '<A-z>c', [[<cmd>lua vim.lsp.buf.code_action()<cr>]], {})
+
+-- lspsaga mappings
+api.nvim_set_keymap('', '<A-x>f', [[<cmd>lua require('lspsaga.provider').lsp_finder()<cr>]], {silent = true})
+api.nvim_set_keymap('!', '<A-x>f', [[<cmd>lua require('lspsaga.provider').lsp_finder()<cr>]], {silent = true})
+api.nvim_set_keymap('', '<A-x>c', [[<cmd>lua require('lspsaga.codeaction').code_action()<cr>]], {silent = true})
+api.nvim_set_keymap('!', '<A-x>c', [[<cmd>lua require('lspsaga.codeaction').code_action()<cr>]], {silent = true})
+
+api.nvim_set_keymap('v', '<A-x>a', [[<cmd>lua require('lspsaga.codeaction').range_code_action()<cr>]], {noremap = true, silent = true})
+
+api.nvim_set_keymap('', '<A-x>k', [[<cmd>lua require('lspsaga.hover').render_hover_doc()<cr>]], {silent = true})
+api.nvim_set_keymap('!', '<A-x>k', [[<cmd>lua require('lspsaga.hover').render_hover_doc()<cr>]], {silent = true})
+api.nvim_set_keymap('', '<A-x>j', [[<cmd>lua require('lspsaga.hover').smart_scroll_hover(1)<cr>]], {silent = true})
+api.nvim_set_keymap('!', '<A-x>j', [[<cmd>lua require('lspsaga.hover').smart_scroll_hover(1)<cr>]], {silent = true})
+api.nvim_set_keymap('', '<A-x>s', [[<cmd>lua require('lspsaga.hover').smart_scroll_hover(-1)<cr>]], {silent = true})
+api.nvim_set_keymap('!', '<A-x>s', [[<cmd>lua require('lspsaga.hover').smart_scroll_hover(-1)<cr>]], {silent = true})
+api.nvim_set_keymap('', '<A-x>h', [[<cmd>lua require('lspsaga.signaturehelp').signature_help()<cr>]], {silent = true})
+api.nvim_set_keymap('!', '<A-x>h', [[<cmd>lua require('lspsaga.signaturehelp').signature_help()<cr>]], {silent = true})
+api.nvim_set_keymap('', '<A-x>r', [[<cmd>lua require('lspsaga.rename').rename()<cr>]], {silent = true})
+api.nvim_set_keymap('!', '<A-x>r', [[<cmd>lua require('lspsaga.rename').rename()<cr>]], {silent = true})
+api.nvim_set_keymap('', '<A-x>di', [[<cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<cr>]], {silent = true})
+api.nvim_set_keymap('!', '<A-x>di', [[<cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<cr>]], {silent = true})
+api.nvim_set_keymap('', '<A-x>p', [[<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<cr>]], {silent = true})
+api.nvim_set_keymap('!', '<A-x>p', [[<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<cr>]], {silent = true})
+api.nvim_set_keymap('', '<A-x>n', [[<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<cr>]], {silent = true})
+api.nvim_set_keymap('!', '<A-x>n', [[<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<cr>]], {silent = true})
+
+api.nvim_set_keymap('', '<A-k>', [[<cmd>LspInfo<cr>]], {silent = true})
+api.nvim_set_keymap('!', '<A-k>', [[<cmd>LspInfo<cr>]], {silent = true})
+--api.nvim_set_keymap('', '<A-h>', [[<cmd>lua require('ultipreview').load_floating_contents()<cr>]], {silent = true})
+--api.nvim_set_keymap('!', '<A-h>', [[<cmd>lua require('ultipreview').load_floating_contents()<cr>]], {silent = true})
+api.nvim_set_keymap('', '<A-j>', [[<cmd>lua require('futil').snippetsList()<cr>]], {silent = true})
+api.nvim_set_keymap('!', '<A-j>', [[<cmd>lua require('futil').snippetsList()<cr>]], {silent = true})
+
+-- DEFINITION
+api.nvim_set_keymap('', '<A-x>dd', [[<cmd>lua require'lspsaga.provider'.preview_definition()<cr>]], {silent = true})
+api.nvim_set_keymap('!', '<A-x>dd', [[<cmd>lua require'lspsaga.provider'.preview_definition()<cr>]], {silent = true})
+
+api.nvim_set_keymap('', '<A-z>dd', [[<cmd>lua vim.lsp.buf.definition()<cr>]], {})
+api.nvim_set_keymap('!', '<A-z>dd', [[<cmd>lua vim.lsp.buf.definition()<cr>]], {})
+
+api.nvim_set_keymap('', '<A-z>dt', [[<cmd>lua vim.lsp.buf.type_definition()<cr>]], {})
+api.nvim_set_keymap('!', '<A-z>dt', [[<cmd>lua vim.lsp.buf.type_definition()<cr>]], {})
