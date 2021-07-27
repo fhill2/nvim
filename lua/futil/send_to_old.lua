@@ -1,5 +1,8 @@
 local send = {}
 
+
+
+-- shiz
 local log = require'log1'
 
 local uv = vim.loop
@@ -8,6 +11,7 @@ local utils = require 'futil/utils'
 local actions = require'omnimenu/actions'
 --local manager = require'floating/manager'
 local nui = require'plugin/nui'
+local Path = require'plenary.path'
 
 local accepted_filepaths = {
     string.format('%s/%s', vim.fn.stdpath('config'), 'lua'), 
@@ -17,7 +21,7 @@ local accepted_filepaths = {
 
 local dest_root = '/home/f1/cl/old'
 
-
+-- send to old add
 
 
 
@@ -81,8 +85,19 @@ if accepted_filepath ~= nil then
 
 
 elseif accepted_filepath == nil then
+
+if current_filepath:find('.vim$') then 
+local _, _, dest_relpath = current_filepath:find('.*/(.*)')
+dest_filepath = string.format('%s/vim/config/%s', dest_root, dest_relpath)
+
+elseif current_filepath:find('init.lua$') then
+local _, _, dest_relpath = current_filepath:find('.*/(.*)')
+dest_filepath = string.format('%s/lua/config/%s', dest_root, dest_relpath)
+
+else
 local _, _, dest_relpath = current_filepath:find('.*/(.*)')
   dest_filepath = string.format('%s/shell/%s', dest_root, dest_relpath)
+end
 end
 
 
@@ -93,6 +108,15 @@ end
 end
 
 
+
+send.test = function()
+
+if mode ~= 'v' then vim.api.nvim_err_writeln('send_to_old: not in visual mode, ending') return end
+
+vim.cmd([['<,'>y]])
+local text = vim.fn.escape(vim.fn.getreg('H'), ' ')
+log.info(text)
+end
 
 send.create_file_and_folders = function(dest_filepath)
 -- UNCOMMENTED BELOW HERE
@@ -118,15 +142,23 @@ end
 
 send.send_visual = function()
 -- sends visual selection to code library
+local mode = vim.api.nvim_get_mode().mode
+
+if mode ~= 'v' then vim.api.nvim_err_writeln('send_to_old: not in visual mode, ending') return end
+
    local visual = vim.api.nvim_call_function('GetVisualSelection', {})
-  vim.api.nvim_feedkeys('dd', 'n', true)
-    local dest_filepath = send.prepare_filepath() 
-    send.create_file_and_folders(dest_filepath)
-utils.append_to_file(dest_filepath, visual)
+    local dest_filepath = Path:new(send.prepare_filepath())
+    log.info(dest_filepath.filename)
+    send.create_file_and_folders(dest_filepath.filename)
+    --utils.append_to_file(dest_filepath, visual)
+    dest_filepath:write('\n\n' .. visual, 'a')
+
+  vim.api.nvim_feedkeys('d', 'v', true)
+
 
 vim.defer_fn(function()
 
-nui.open({ name = 'main', action = 'open_file', filepath = dest_filepath})
+nui.open({ name = 'send_to_old', action = 'open_file', action_args = { pos = 'btm'}, filepath = dest_filepath.filename})
 
      end, 50)
   

@@ -95,8 +95,8 @@ defaults = {
       show_unindexed = true,
       ignore_patterns = {"*.git/*", "*/tmp/*"},
       workspaces = {
-        ["conf"]    = "/home/f1/.config",
-        ["data"]    = "/home/f1/.local/nvim"
+        ["cl"]    = "~/cl",
+        --["data"]    = "/home/f1/.local/nvim"
       },
 bookmarks = {
       -- Available: 'brave', 'google_chrome', 'safari', 'firefox', 'firefox_dev'
@@ -125,7 +125,7 @@ require'telescope'.load_extension("cheat")
 --require('telescope').load_extension('ultisnips')
 --require('telescope').load_extension('livetablelogger')
 --require('telescope').load_extension('floating')
---require('telescope').load_extension('frecency')
+require('telescope').load_extension('frecency')
 require('telescope').load_extension('bookmarks')
 
 
@@ -466,10 +466,10 @@ function themes.get_editor_scoped(opts)
     --preview_title = "asd fruits",
     results_title = " ",
     layout_config = {
-      height = 20,
+     -- height = 20,
       preview_cutoff = 20, -- NEEDED for editor_vertical
     },
-    layout_strategy = "editor_vertical",
+    layout_strategy = "horizontal",
    -- border = true,
     border = true,
     borderchars = {
@@ -509,8 +509,8 @@ function themes.get_btm(opts)
     prompt_title = string.format('%s %s', telescope.settings.c_type, opts.cwd),
     --preview_title = "",
     --results_title = "",
-    layout_config = layout_config,
-    layout_strategy = layout_strategy,
+    --layout_config = layout_config,
+    layout_strategy = 'horizontal',--layout_strategy,
     border = true,
     borderchars = {
       prompt = { "─", " ", " ", " ", "─", "─", " ", " " },

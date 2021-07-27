@@ -1,4 +1,4 @@
-" let g:codi#interpreters = {
+ " let g:codi#interpreters = {
 "       \  'lua': {
 "       \ 'bin': 'lua',
 "       \ },
@@ -10,8 +10,6 @@ let g:codi#interpreters = {
 \ 'prompt': '^\(>\|\.\.\.\+\) ',
 \ }
 \ }
-
-
 
 
 
@@ -30,8 +28,5 @@ hi ColorColumn ctermbg=NONE
                  hi NonText ctermfg=0 
                  "let g:codi#raw=1
 
-
-
-"echo "CODI LOADED"
 
 let g:codi#log = '/home/f1/logs/nvim-plugins/codi.log'

@@ -79,13 +79,18 @@
 --     \     'hint': "",
 --     \     'info': "",
 --     \     'warning': "",
---     \     'error': "",
+--requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}--     \     'error': "",
 --     \   }
 --     \ }
 
 
 
 
+vim.g.nvim_tree_quit_on_open = 0
+vim.g.nvim_tree_auto_close = 0
+vim.g.nvim_tree_auto_open = 0
+vim.g.nvim_tree_follow = 0
+vim.g.nvim_tree_update_cwd = 0
 
 
 

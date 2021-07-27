@@ -20,6 +20,7 @@ end
 -- check if all folders in a filepath exist. if not, create them
 -- only works for folders in current user folder
 utils.create_fp_dirs = function(fp)
+
 local home = uv.os_homedir()
 
 if fp:find(home) then 
@@ -58,35 +59,37 @@ end
 
 utils.reversed_ipairs = function(t) return reversedipairsiter, t, #t + 1 end
 
-utils.append_to_file = function(filepath, msg)
-    -- this rewrites the whole file again, it doesnt incremental write
 
-    -- read data 
-    local fd = vim.loop.fs_open(filepath, "r", 438)
-    if fd == nil then return '' end
-    local stat = assert(vim.loop.fs_fstat(fd))
-    if stat.type ~= 'file' then return '' end
-    local data = assert(vim.loop.fs_read(fd, stat.size, 0))
-    assert(vim.loop.fs_close(fd))
 
-    -- combine orig data and new data
-    if type(msg) == 'string' then
-        data = msg .. '\n' .. data
-    elseif type(msg) == 'table' then
-        for i, str in ipairs(msg) do data = str .. '\n' .. data end
-    end
-    local msg = '\n' .. data .. '\n'
-    lo(msg)
+-- utils.append_to_file = function(filepath, msg)
+--     -- this rewrites the whole file again, it doesnt incremental write
 
-    -- write to same file
-    local fdp = uv.fs_open(filepath, "w", 438)
+--     -- read data 
+--     local fd = vim.loop.fs_open(filepath, "r", 438)
+--     if fd == nil then return '' end
+--     local stat = assert(vim.loop.fs_fstat(fd))
+--     if stat.type ~= 'file' then return '' end
+--     local data = assert(vim.loop.fs_read(fd, stat.size, 0))
+--     assert(vim.loop.fs_close(fd))
 
-    uv.fs_write(fdp, msg, nil, function()
-        lo('old_filepath written')
-        uv.fs_close(fdp)
-    end)
+--     -- combine orig data and new data
+--     if type(msg) == 'string' then
+--         data = msg .. '\n' .. data
+--     elseif type(msg) == 'table' then
+--         for i, str in ipairs(msg) do data = str .. '\n' .. data end
+--     end
+--     local msg = '\n' .. data .. '\n'
+--     lo(msg)
 
-end
+--     -- write to same file
+--     local fdp = uv.fs_open(filepath, "w", 438)
+
+--     uv.fs_write(fdp, msg, nil, function()
+--         lo('old_filepath written')
+--         uv.fs_close(fdp)
+--     end)
+
+-- end
 
 
 utils.remove_socket = function(filepath)

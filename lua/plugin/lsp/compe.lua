@@ -1,3 +1,7 @@
+
+
+vim.o.completeopt = "menuone,noselect"
+
 require'compe'.setup {
   enabled = true;
   autocomplete = true;
@@ -32,3 +36,6 @@ require'compe'.setup {
     zsh = true;
   };
 }
+
+vim.g.python3_host_prog = '/usr/bin/python3'
+

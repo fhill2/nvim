@@ -8,6 +8,8 @@ local api = vim.api
 --- =============== ADDED TO OMNIMENU END
 
 
+
+--api.nvim_set_keymap('n', 'G', '<cmd>normal! G<cr>', { noremap = true})
 -- Lwin trigger comand line 
 --api.nvim_set_keymap('n', ':', '<Nop>', { noremap = true})
 api.nvim_set_keymap('n', '<F23>', ':', { noremap = true})
@@ -96,7 +98,9 @@ api.nvim_set_keymap('n', "<C-j>", "<C-w>j", { silent = true})
 api.nvim_set_keymap('n', "<C-k>", "<C-w>k", { silent = true })
 api.nvim_set_keymap('n', "<C-l>", "<C-w>l", { silent = true })
 
-api.nvim_set_keymap('n', "<C-a>d", "<cmd>vsp<cr>", { silent = true })
+api.nvim_set_keymap('', "<C-a>d", "<cmd>vsp<cr>", { silent = true })
+api.nvim_set_keymap('!', "<C-a>d", "<cmd>vsp<cr>", { silent = true })
+
 api.nvim_set_keymap('n', "<C-a>f", "<cmd>sp<cr>", { silent = true })
 
 -- close window in terminal

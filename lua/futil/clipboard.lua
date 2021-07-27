@@ -1,10 +1,10 @@
 local M = {}
 
 function M.onTextYankPost()
-lo('onTextYankPost trig')
+--lo('onTextYankPost trig')
 --lo(vim.v.event)
 local clip = vim.v.event.regcontents[1]
-lo(clip)
+--lo(clip)
 
 
 end

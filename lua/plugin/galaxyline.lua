@@ -89,15 +89,15 @@ gls.left[1] = {
   },
 }
 
-gls.left[6] = {
-  shellrepl = {
-  provider = function()
-      return require'shell-repl/statusline'.status()
-  end,
-  condition = function() if pcall(require'shell-repl/statusline'.status) == true then return true else return false end
-end
-},
-}
+-- gls.left[6] = {
+--   shellrepl = {
+--   provider = function()
+--       return pcall(require'shell-repl/statusline'.status)
+--   end,
+--   condition = function() if pcall(require'shell-repl/statusline'.status) == true then return true else return false end
+-- end
+-- },
+-- }
 
 gls.left[7] = {
     Luapadexist = {

@@ -3,6 +3,12 @@ local log = require'log1'
 local Popup = require("nui.popup")
 
 
+
+-- asdasd
+-- this
+-- is a multi
+-- line
+
 nui.manager = {}
 
 
@@ -15,19 +21,20 @@ vim.api.nvim_buf_call(self.bufnr, function() nui.actions[opts.action](opts) end)
 end
 
 
+
 nui.new = function(opts)
 
 
   local choose = {
-    main = {
+    send_to_old = {
   border = {
     style = "rounded",
     highlight = "FloatBorder",
-    text = { top = string.format('send_to_old', opts.filepath), top_align = 'center' }
+    text = { top = string.format(' send_to_old %s ', opts.filepath), top_align = 'center' }
   },
-  position = {row = "100%", col = "50%"},
+  position = {row = "95%", col = "50%"},
   size = {
-    width = "50%",
+    width = "90%",
     height = "20%",
   },
   opacity = 1,
@@ -37,6 +44,7 @@ nui.new = function(opts)
 
 
 nui.manager[opts.name] = Popup(choose[opts.name])
+nui.manager[opts.name].startup_opts = opts
 
 nui.manager[opts.name].execute_actions = execute_actions
 
@@ -44,20 +52,57 @@ end
 
 
 nui.open = function(opts)
-if nui.manager[opts.name] then 
-  if opts.action then nui.manager[opts.name]:execute_actions(opts) end
-  log.info('config already exists, executing actions')
-else
+
+
+local function new(opts)
+log.info('nui: new')
 nui.new(opts)
 nui.mount(opts)
 if opts.action then nui.manager[opts.name]:execute_actions(opts) end
---log.info(nui.manager)
 end
+
+local function unmount_new(opts)
+log.info('nui: unmount_new')
+nui.unmount(opts)
+new(opts)
+end
+
+local function execute_actions_only(opts)
+  log.info('executing actions only')
+if opts.action then nui.manager[opts.name]:execute_actions(opts) end
+end
+
+
+
+
+
+
+if not nui.manager[opts.name] then
+
+new(opts)
+
+elseif nui.manager[opts.name] then 
+
+log.info(opts)
+log.info(opts.filepath)
+log.info(nui.manager[opts.name].startup_opts.filepath)
+if opts.name == 'send_to_old' and opts.action == 'open_file' and opts.filepath ~= nui.manager[opts.name].startup_opts.filepath then
+unmount_new(opts) end
+
+execute_actions_only(opts)
+end
+
+
+
 end
 
 nui.mount = function(opts)
 nui.manager[opts.name]:mount()
+
 end
+
+
+
 
 
 nui.unmount = function(opts)
@@ -109,7 +154,14 @@ open_file = function(opts)
  vim.schedule(function() vim.api.nvim_buf_call(opts.bufnr, function() vim.cmd([[edit!]]) end) end)
 
     vim.cmd('e!')
-          end, 
+    
+
+    if opts.action_args.pos == 'btm' then 
+      log.info('pos is bottom!')  
+      vim.cmd([[normal! G]])
+      end
+
+          end, -- end open_file
 
 
 
