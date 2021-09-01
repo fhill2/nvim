@@ -10,7 +10,7 @@ require("toggleterm").setup{
   --   end
   -- end,
 
-  open_mapping = [[<c-\>]],
+  open_mapping = [[<a-l>]],
   hide_numbers = true, -- hide the number column in toggleterm buffers
   shade_filetypes = {},
   shade_terminals = true,
@@ -37,3 +37,33 @@ require("toggleterm").setup{
     }
   }
 }
+
+
+local log = require'log1'
+
+-- works without shell wrapper fn
+
+local get_init = require('xplr.utils').get_init 
+local get_root = require('xplr.utils').get_root 
+local Terminal  = require('toggleterm.terminal').Terminal
+local cmd = ('export NVIM_XPLR_ROOT=%s && xplr -C "%s"'):format(get_root(), get_init())
+local xplr = Terminal:new({ 
+  cmd = cmd, 
+  hidden = true, 
+  on_open = function(term)
+      log.info(term)
+      end
+
+
+
+})
+
+function _xplr_toggle()
+  xplr:toggle()
+end
+
+vim.api.nvim_set_keymap("n", "<space>k", "<cmd>lua _xplr_toggle()<CR>", {noremap = true, silent = true})
+
+
+
+

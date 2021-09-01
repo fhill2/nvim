@@ -25,7 +25,7 @@ local function init() -- only 1 function below here
   packer.reset()
  
 
-  
+ 
 use_rocks {'luaformatter', server = 'https://luarocks.org/dev'}
 use_rocks 'luacheck' 
 use_rocks 'luarepl'
@@ -45,19 +45,29 @@ use 'mhartington/formatter.nvim'
 use 'nvim-telescope/telescope-z.nvim'
 use 'b3nj5m1n/kommentary'
 use 'akinsho/nvim-bufferline.lua'
+use 'https://github.com/moll/vim-bbye'
+-- use {
+--    'glepnir/galaxyline.nvim',
+--     branch = 'main'
+--     -- requires = {'kyazdani42/nvim-web-devicons', opt = true}
+--   }
+
 use {
-   'glepnir/galaxyline.nvim',
-    branch = 'main'
-    -- your statusline/
+  'glepnir/galaxyline.nvim',
+    branch = 'main',
+    -- your statusline
+    --config = function() require'my_statusline' end,
     -- some optional icons
-    -- requires = {'kyazdani42/nvim-web-devicons', opt = true}
-  }
+    requires = {'kyazdani42/nvim-web-devicons', opt = true}
+}
+
+--use 'hoob3rt/lualine.nvim'
 use 'mhinz/vim-lookup'
 use 'sayanarijit/xplr.vim' 
 use 'nvim-lua/popup.nvim'
 use 'nvim-lua/plenary.nvim'
 use { forks .. '/telescope.nvim', requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}}
-
+use 'tpope/vim-fugitive'
 
 use 'rktjmp/fwatch.nvim'
 use 'windwp/nvim-spectre' -- ide like search replace
@@ -68,15 +78,18 @@ use 'nvim-telescope/telescope-snippets.nvim'
 use { 'fhill2/telescope-ultisnips.nvim'}
 use 'tami5/sql.nvim'
 use 'nvim-telescope/telescope-cheat.nvim'
-use {'nvim-telescope/telescope-frecency.nvim'}
+use { forks .. '/telescope-frecency.nvim'}
 use 'nvim-telescope/telescope-fzy-native.nvim'
 use 'norcalli/snippets.nvim' 
 use 'rafcamlet/nvim-luapad' 
 use 'metakirby5/codi.vim'
 use 'svermeulen/vimpeccable'
-use 'bfredl/nvim-luadev'
+--use 'bfredl/nvim-luadev'
 use 'tjdevries/nlua.nvim'
 use { me .. '/omnimenu.nvim' } 
+
+
+
 use 'neovim/nvim-lspconfig'
 use 'kabouzeid/nvim-lspinstall'
 use 'hrsh7th/nvim-compe'
@@ -88,7 +101,12 @@ use 'tjdevries/lsp_extensions.nvim'
 use 'glepnir/lspsaga.nvim'
 use 'kosayoda/nvim-lightbulb'
 use 'nvim-lua/lsp-status.nvim'
-use {'iamcco/markdown-preview.nvim'} -- , run = 'cd app & npm install' }
+use 'folke/lua-dev.nvim' -- plugin and nvim api hover docs for lua lsp 
+
+
+use {'iamcco/markdown-preview.nvim', run = 'cd app & yarn install' }
+
+use {"npxbr/glow.nvim", run = "GlowInstall"}
 use 'honza/vim-snippets'
 use 'SirVer/ultisnips'
 use 'L3MON4D3/LuaSnip'
@@ -118,11 +136,16 @@ use 'tpope/vim-scriptease'
 use 'ms-jpq/neovim-async-tutorial'
 use 'fhill2/testrepo'
 use 'folke/neoscroll.nvim'
-use 'folke/lua-dev.nvim'
 use 'folke/todo-comments.nvim'
 use 'folke/ultra-runner'
 use 'folke/persistence.nvim'
 use 'folke/twilight.nvim'
+
+use 'kevinhwang91/rnvimr' 
+-- git
+use 'TimUntersberger/neogit'
+use 'sindrets/diffview.nvim'
+
 
 -- sort out
 use { me .. '/xplr.nvim', requires = {{'fhill2/telescope.nvim'}}} 

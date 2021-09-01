@@ -38,7 +38,8 @@ local function lua_filepath_to_requirepath(current_filepath)
     -- breaks on init.lua - dont put through this
     local plugin_filepaths = {
         string.format('%s/%s', vim.fn.stdpath('config'), 'plugins-manual'), string.format('%s/%s', vim.fn.stdpath('config'), 'plugins-me'), string.format('%s/%s', vim.fn.stdpath('data'), 'site/pack/packer/opt'),
-        string.format('%s/%s', vim.fn.stdpath('data'), 'site/pack/packer/start')
+        string.format('%s/%s', vim.fn.stdpath('data'), 'site/pack/packer/start'),
+        '/home/f1/cl/lua/fork-plug'
     }
 
     local non_plugin_filepaths = {
@@ -71,7 +72,7 @@ local function lua_filepath_to_requirepath(current_filepath)
         end
     end
 
-    if not found_result then print('filepath not in list of accepted plugin or non plugin filepaths') return end
+    if not found_result then print(vim.fn.expand('%'),' filepath not in list of accepted plugin or non plugin filepaths') return end
     -- print(current_filepath)
     -- print(filepath_for_sub)
 

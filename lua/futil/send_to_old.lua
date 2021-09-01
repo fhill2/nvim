@@ -10,7 +10,7 @@ local open_mode = uv.constants.O_CREAT + uv.constants.O_WRONLY + uv.constants.O_
 local utils = require 'futil/utils'
 local actions = require'omnimenu/actions'
 --local manager = require'floating/manager'
-local nui = require'plugin/nui'
+local nui = require'futil/nui/popup'
 local Path = require'plenary.path'
 
 local accepted_filepaths = {

@@ -39,10 +39,23 @@ endfunction
 " call writefile([a:msg], "/home/f1/.local/share/nvim/logs/nvim-vim.log", "a")
 " endfunction
 
+function! Slisten() 
 
+function! SockHandler(chan_id, data, event)
+   let g:event = [a:chan_id, a:data, a:event]
+ endfunction
+
+let x = sockconnect('pipe', '/tmp/nv2server.sock', {'on_output': 'SockHandler'})
+call jobsend(x, "blargh")
+echo g:event 
+
+endfunction
 
 " call this from script:
-" call Log('msg')
+" call Log('msg
+"
+"
+
 
 " Log a message
 function! Log(message)

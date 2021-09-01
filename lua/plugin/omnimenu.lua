@@ -24,11 +24,11 @@ require'omnimenu'.setup {
   },
 
 --- ============= <C-> MAPPINGS ============
- {
-    name = 'send_to_old test',
-    action = function() require('futil/send_to_old').test() end,
-    keymap = {{'n', '<C-a>m', {}}, {'!', '<C-a>m', {}}}
-  },
+ -- {
+ --    name = 'send_to_old test',
+ --    action = function() require('futil/send_to_old').test() end,
+ --    keymap = {{'n', '<C-a>m', {}}, {'!', '<C-a>m', {}}}
+ --  },
 
  {
     cat = "custom",
@@ -52,25 +52,26 @@ require'omnimenu'.setup {
    keymap = { {'', '<C-a>g', {}}, {'!', '<C-a>g', {}} }
   },
   {
-    name = 'nui - close all floating windows',
-    action = function() require('plugin/nui').close_all_windows() end,
-    keymap = {{'', '<C-a>e', {}},{'!', '<C-a>e', {}}}
-  },
- {
     name = 'telescope - close persistent',
     action = function() require('plugin/telescope').close('persistent') end,
-    keymap = {{'', '<C-a>q', {}}, {'!', '<C-a>q', {}}}
+    keymap = {{'', '<space>aw', {}}, {'!', '<C-a>q', {}}}
   },
 {
     name = 'telescope - focus persistent',
     action = function() require('plugin/telescope').focus('persistent') end,
-    keymap = {{'', '<C-a>w', {}}, {'!', '<A-a>w', {}}}
+    keymap = {{'', '<space>aq', {}}, {'!', '<A-a>w', {}}}
   },
+ {
+    name = 'nui - close all floating windows',
+    action = function() require('plugin/nui').close_all_windows() end,
+    keymap = {{'', '<C-a>w', {}},{'!', '<C-a>e', {}}}
+  },
+
 
  {
     name = 'nui - focus cycle',
     action = function() require("plugin/nui").focus() end,
-    keymap = {{'', '<C-a>j', {}}, {'!', '<C-a>j', {}}}
+    keymap = {{'', '<C-a>q', {}}, {'!', '<C-a>j', {}}}
   },
 
 
@@ -105,37 +106,42 @@ require'omnimenu'.setup {
 ---  ===== persistence ====
 
 
+--     ==== frecency ======
+-- {
+--     name = 'tele frecency - cl',
+--     action = function() require('telescope').extensions.frecency.frecency({ default_text = ":cl:"}) end,
+--     keymap = {{'n', '<space>ad', {}}} --, {'!', '<A-d>a', {}}}
+--   },
+
+  
+
  ---   ==== find_files ====
- {
-    name = 'telescope - find_files - cwd',
-    action = function() require('plugin/telescope').find_files({cwd = vim.fn.getcwd() }) end,
-    keymap = {{'n', '<space>aa', {}}} --, {'!', '<A-a>a', {}}}
-  },
- {
-    name = 'telescope - find_files - .dotfiles',
-    action = function() require('plugin/telescope').find_files({ cwd = '/home/f1/.dotfiles'}) end,
-    keymap = {{'n', '<space>ad', {}}} --, {'!', '<A-a>d', {}}}
-  },
+ -- {
+ --    name = 'telescope - find_files - cwd',
+ --    action = function() require('plugin/telescope').find_files({cwd = vim.fn.getcwd() }) end,
+ --    keymap = {{'n', '<space>aa', {}}} --, {'!', '<A-a>a', {}}}
+ --  },
+ -- {
+ --    name = 'telescope - find_files - .dotfiles',
+ --    action = function() require('plugin/telescope').find_files({ cwd = '/home/f1/.dotfiles'}) end,
+ --    keymap = {{'n', '<space>ad', {}}} --, {'!', '<A-a>d', {}}}
+ --  },
  {
     name = 'telescope - find_files - code library',
-    action = function() require('plugin/telescope').find_files({ cwd = '~/cl' }) end,
-    keymap = {{'n', '<space>ac', {}}} --, {'!', '<A-a>c', {}}}
+    action = function() require('plugin/find_frecency').find_frecency({ cwd = '~/cl' }) end,
+    keymap = {{'n', '<space>ad', {}}} --, {'!', '<A-a>c', {}}}
   },
- {
-    name = 'telescope - find_files - nvim plugins',
-    action = function() require('plugin/telescope').find_files({ cwd = string.format('%s/site/pack/packer', vim.fn.stdpath('data'))}) end,
-    keymap = {{'n', '<space>av', {}}} --, {'!', '<A-a>v', {}}}
-  },
- {
-    name = 'telescope - find_files - plugins-manual',
-    action = function() require('plugin/telescope').find_files({ cwd = '~/code/obsidian/DEV'}) end,
-    keymap = {{'n', '<space>ab', {}}} --, {'!', '<A-a>b', {}}}
-  },
- {
-    name = 'telescope - find_files - plugins-me',
-    action = function() require('plugin/telescope').find_files({ cwd = string.format('%s/plugins-me', vim.fn.stdpath('config'))}) end,
-    keymap = {{'n', '<space>an', {}}} --, {'!', '<A-a>n', {}}}
-  },
+ -- {
+ --    name = 'telescope - find_files - nvim plugins',
+ --    action = function() require('plugin/telescope').find_files({ cwd = string.format('%s/site/pack/packer', vim.fn.stdpath('data'))}) end,
+ --    keymap = {{'n', '<space>av', {}}} --, {'!', '<A-a>v', {}}}
+ --  },
+
+ -- {
+ --    name = 'telescope - find_files - plugins-me',
+ --    action = function() require('plugin/telescope').find_files({ cwd = string.format('%s/plugins-me', vim.fn.stdpath('config'))}) end,
+ --    keymap = {{'n', '<space>an', {}}} --, {'!', '<A-a>n', {}}}
+ --  },
 --- ==== live_grep ====
  {
     name = 'telescope - live_grep - cwd',
@@ -144,23 +150,18 @@ require'omnimenu'.setup {
   },
  {
     name = 'telescope - live_grep - .dotfiles',
-    action = function() require('plugin/telescope').live_grep({ cwd = '~/.dotfiles'}) end,
-    keymap = {{'n', '<space>dd', {}}} --, {'!', '<A-d>d', {}}}
+    action = function() require('plugin/telescope').live_grep({ cwd = '~/cl/dot'}) end,
+    keymap = {{'n', '<space>dc', {}}} --, {'!', '<A-d>d', {}}}
   },
  {
     name = 'telescope - live_grep - code library',
     action = function() require('plugin/telescope').live_grep({ cwd = '~/cl' }) end,
-    keymap = {{'n', '<space>dc', {}}} --, {'!', '<A-d>c', {}}}
+    keymap = {{'n', '<space>dd', {}}} --, {'!', '<A-d>c', {}}}
   },
  {
     name = 'telescope - live_grep - nvim plugins',
     action = function() require('plugin/telescope').live_grep({ cwd = string.format('%s/site/pack/packer', vim.fn.stdpath('data'))}) end,
     keymap = {{'n', '<space>dv', {}}} --, {'!', '<A-d>v', {}}}
-  },
- {
-    name = 'telescope - live_grep - plugins-manual',
-    action = function() require('plugin/telescope').live_grep({ cwd = '~/code/obsidian/DEV'}) end,
-    keymap = {{'n', '<space>db', {}}} --, {'!', '<A-d>b', {}}}
   },
  {
     name = 'telescope - live_grep - plugins-me',
@@ -176,7 +177,7 @@ require'omnimenu'.setup {
   },
  {
     name = 'telescope - file_browser - .dotfiles',
-    action = function() require('plugin/telescope').file_browser({ cwd = '~/.dotfiles'}) end,
+    action = function() require('plugin/telescope').file_browser({ cwd = '~/cl/dot'}) end,
     keymap = {{'n', '<space>zd', {}}} --, {'!', '<A-z>d', {}}}
   },
  {
@@ -189,12 +190,7 @@ require'omnimenu'.setup {
     action = function() require('plugin/telescope').file_browser({ cwd = string.format('%s/site/pack/packer', vim.fn.stdpath('data'))}) end,
     keymap = {{'n', '<space>zv', {}}} --, {'!', '<A-z>v', {}}}
   },
- {
-    name = 'telescope - file_browser - plugins-manual',
-    action = function() require('plugin/telescope').file_browser({ cwd = '~/code/obsidian/DEV'}) end,
-    keymap = {{'n', '<space>zb', {}}} --, {'!', '<A-z>b', {}}}
-  },
- {
+  {
     name = 'telescope - file_browser - plugins-me',
     action = function() require('plugin/telescope').file_browser({ cwd = string.format('%s/plugins-me', vim.fn.stdpath('config'))}) end,
     keymap = {{'n', '<space>zn', {}}} --, {'!', '<A-z>n', {}}}
@@ -207,6 +203,18 @@ require'omnimenu'.setup {
     name = 'telescope - buffers',
     action = function() require('plugin/telescope').buffers() end,
     keymap = {{'n', '<space>zb', {}}} --, {'!', '<A-a>b', {}}}
+  },
+ {
+    name = 'telescope - ultisnips',
+    action = function() require'telescope'.extensions.ultisnips.ultisnips() end,
+    keymap = {{'n', '<space>ag', {}}, {'v', '<space>ag', {}}}
+
+    --keymap = {{ {'n', '<space>ag', {}}, {'!', '<space>ag', {}}}} --, {'!', '<A-a>b', {}}}
+  },
+ {
+    name = 'telescope - oldfiles',
+    action = function() require('telescope.builtin').oldfiles() end,
+    keymap = {{'n', '<space>ar', {}}} --, {'!', '<A-a>b', {}}}
   },
 
 
@@ -224,19 +232,18 @@ require'omnimenu'.setup {
 -- api.nvim_set_keymap('!', '<A-a>g', [[<cmd>lua require('telescope.builtin').builtin()<cr>]], {})
 -- api.nvim_set_keymap('', '<A-a>o', [[<cmd>lua require('telescope.builtin').registers()<cr>]], {})
 -- api.nvim_set_keymap('!', '<A-a>o', [[<cmd>lua require('telescope.builtin').registers()<cr>]], {})
--- api.nvim_set_keymap('', '<A-a>r', [[<cmd>lua require('telescope.builtin').oldfiles()<cr>]], {})
--- api.nvim_set_keymap('!', '<A-a>r', [[<cmd>lua require('telescope.builtin').oldfiles()<cr>]], {})
 -- api.nvim_set_keymap('', '<A-a>v', [[<cmd>lua require('telescope.builtin').commands()<cr>]], {})
 -- api.nvim_set_keymap('!', '<A-a>v', [[<cmd>lua require('telescope.builtin').commands()<cr>]], {})
--- api.nvim_set_keymap('', '<A-a>l', [[<cmd>lua require'telescope'.extensions.ultisnips.ultisnips{}<cr>]], {})
--- api.nvim_set_keymap('!', '<A-a>l', [[<cmd>lua require'telescope'.extensions.ultisnips.ultisnips{}<cr>]], {})
-
 -- api.nvim_set_keymap('', '<A-a>t', [[<cmd>lua require('telescope').extensions.packer.plugins(opts)<cr>]], {})
 -- api.nvim_set_keymap('!', '<A-a>t', [[<cmd>lua require('telescope').extensions.packer.plugins(opts)<cr>]], {})
+
+
+-- api.nvim_set_keymap('', '<A-a>r', [[<cmd>lua require('telescope.builtin').oldfiles()<cr>]], {})
+-- api.nvim_set_keymap('!', '<A-a>r', [[<cmd>lua require('telescope.builtin').oldfiles()<cr>]], {})
 -- api.nvim_set_keymap('', '<A-a>2', [[<cmd>lua require('telescope').extensions.frecency.frecency()<cr>]], {})
 -- api.nvim_set_keymap('!', '<A-a>2', [[<cmd>lua require('telescope').extensions.frecency.frecency()<cr>]], {})
-
-
+-- api.nvim_set_keymap('', '<A-a>l', [[<cmd>lua require'telescope'.extensions.ultisnips.ultisnips{}<cr>]], {})
+-- api.nvim_set_keymap('!', '<A-a>l', [[<cmd>lua require'telescope'.extensions.ultisnips.ultisnips{}<cr>]], {})
 
 
 
@@ -254,35 +261,39 @@ require'omnimenu'.setup {
   },
 {
     name = 'nvim-tree - .dotfiles',
-    action = function()   require'plugin/nvim-tree'.open('/home/f1/.dotfiles') end,
+    action = function()   require'plugin/nvim-tree'.open('/home/f1/cl/dot') end,
     keymap = {{'n', '<space>fd', {}}} --, {'!', '<A-f>d', {}}}
   },
 {
-    name = 'nvim-tree - plugins',
-    action = function()  require'plugin/nvim-tree'.open(string.format('%s/site/pack/packer/opt', vim.fn.stdpath('data'))
-) end,
-    keymap = {{'n', '<space>fv', {}}} --, {'!', '<A-f>v', {}}}
+    name = 'nvim-tree - Sleuth',
+    action = function()   require'plugin/nvim-tree'.open('/home/f1/obsidian/UCL/intro-to-prog/assets/sleuth') end,
+    keymap = {{'n', '<space>fg', {}}} --, {'!', '<A-f>d', {}}}
   },
 {
-    name = 'nvim-tree - plugins manual',
-    action = function()  require'plugin/nvim-tree'.open('/home/f1/code/obsidian/DEV') end,
-    keymap = {{'n', '<space>fb', {}}} --, {'!', '<A-f>b', {}}}
+    name = 'nvim-tree - game',
+    action = function()   require'plugin/nvim-tree'.open('/home/f1/obsidian/UCL/intro-to-prog/assets/game') end,
+    keymap = {{'n', '<space>fh', {}}} --, {'!', '<A-f>d', {}}}
   },
-{
-    name = 'nvim-tree - plugins me',
-    action = function()  require'plugin/nvim-tree'.open(string.format('%s/plugins-me', vim.fn.stdpath('config'))) end,
-    keymap = {{'n', '<space>fn', {}}} --, {'!', '<A-f>n', {}}}
-  },
-
-
-
-
-
-
-
-
 
 }
+-- {
+--     name = 'nvim-tree - plugins',
+--     action = function()  require'plugin/nvim-tree'.open(string.format('%s/site/pack/packer/opt', vim.fn.stdpath('data'))
+-- ) end,
+--     keymap = {{'n', '<space>fv', {}}} --, {'!', '<A-f>v', {}}}
+--   },
+-- {
+--     name = 'nvim-tree - plugins manual',
+--     action = function()  require'plugin/nvim-tree'.open('/home/f1/code/obsidian/DEV') end,
+--     keymap = {{'n', '<space>fb', {}}} --, {'!', '<A-f>b', {}}}
+--   },
+-- {
+--     name = 'nvim-tree - plugins me',
+--     action = function()  require'plugin/nvim-tree'.open(string.format('%s/plugins-me', vim.fn.stdpath('config'))) end,
+--     keymap = {{'n', '<space>fn', {}}} --, {'!', '<A-f>n', {}}}
+--   },
+
+-- }
 
 
 

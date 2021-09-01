@@ -17,6 +17,7 @@ vim.cmd[[command! Pcomp packadd packer.nvim | lua require('plugins').compile()]]
 
 
 local function rerequire(req_path)
+
 reload(req_path)
 require(req_path)
 end
@@ -29,7 +30,9 @@ lo('====== NVIM STARTUP =====')
 rerequire('plugins')
 
 require('plugin/bufferline')
-rerequire('plugin/galaxyline')
+--rerequire('plugin/galaxyline')
+rerequire('plugin/galaxyline/neonline')
+--rerequire('plugin/lualine')
 rerequire('plugin/iron')
 rerequire('plugin/formatter')
 rerequire('plugin/xplr')
@@ -43,11 +46,13 @@ rerequire('plugin/toggleterm')
 rerequire('plugin/treesitter')
 rerequire('plugin/nvim-tree')
 rerequire('plugin/omnimenu')
+rerequire('plugin/diffview')
 
 rerequire('keymap/main')
 rerequire('keymap/lsp')
 rerequire('keymap/luapad')
 rerequire('keymap/vista')
+
 
 -- opts still to add
 -- vim.o.wildmode = vim.o.wildmode - 'list'
@@ -202,6 +207,13 @@ vim.cmd[[augroup end]]
 --turn off auto commenting for every buffer
 vim.cmd[[autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o]]
 
+vim.cmd[[autocmd VimEnter * lua require'futil.autocmd'.vimenter()]]
+
+
+
+--vim.cmd[[autocmd BufWinLeave term://* lua require'futil.terminal'.bufwinleave()]]
+
+
 
 --turn on/off logging for format.nvim lukas-reineke
 vim.g.format_debug = true
@@ -243,3 +255,25 @@ vim.cmd[[set clipboard=unnamedplus]]
 
 vim.cmd('colorscheme tokyonight')
 
+vim.cmd('let g:UltiSnipsSnippetDirectories=[$HOME."/cl/snippets/ultisnips"]')
+--vim.cmd([[e ~/cl/lua/scratch/mroavi2.lua]])
+--
+--
+--
+--
+--
+--
+--
+--
+--
+
+-- local leader = " "
+
+local Terminal  = require('toggleterm.terminal').Terminal
+local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
+
+function _lazygit_toggle()
+  lazygit:toggle()
+end
+
+vim.api.nvim_set_keymap("n", "<space>ll", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})

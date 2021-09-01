@@ -20,8 +20,8 @@ local prettier = function()
     args = {
       "--stdin-filepath",
       vim.api.nvim_buf_get_name(0),
-      "--config",
-      vim.fn.stdpath("config") .. "/formatconfig/elianiva.prettierrc"
+     -- "--config",
+     -- "~/cl/format/elianiva.prettierrc"
     },
     stdin = true,
   }
@@ -58,7 +58,7 @@ local stylua = function()
     exe = "stylua",
     args = {
       "--config-path",
-      "~/.config/nvim/formatconfig/elianiva.stylua",
+      "~/cl/format/stylua/nui.toml",
       "-"
     },
     stdin = true,

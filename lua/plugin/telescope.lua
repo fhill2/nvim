@@ -95,7 +95,8 @@ defaults = {
       show_unindexed = true,
       ignore_patterns = {"*.git/*", "*/tmp/*"},
       workspaces = {
-        ["cl"]    = "~/cl",
+        ["cl"]    = "/home/f1/cl",
+        ["test"]  = "/home/f1/test",
         --["data"]    = "/home/f1/.local/nvim"
       },
 bookmarks = {
@@ -122,7 +123,7 @@ fzy_native = {
 require('telescope').load_extension('fzy_native')
 --require('telescope').load_extension('snippets')
 require'telescope'.load_extension("cheat")
---require('telescope').load_extension('ultisnips')
+require('telescope').load_extension('ultisnips')
 --require('telescope').load_extension('livetablelogger')
 --require('telescope').load_extension('floating')
 require('telescope').load_extension('frecency')
